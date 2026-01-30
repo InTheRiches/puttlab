@@ -14,6 +14,8 @@ import {getFriends} from "../../services/friendServices";
 import StrokesGainedModal from "../../components/user/StrokesGainedModal";
 import {roundTo} from "../../utils/roundTo";
 import {convertUnits} from "../../utils/Conversions";
+import {createMonthAggregateStats} from "../../constants/Constants";
+import deepAdd from "../../utils/DeepAdd";
 
 export default function ProfileScreen() {
     const { userData, byMonthStats, sessions } = useAppContext();
@@ -24,13 +26,15 @@ export default function ProfileScreen() {
 
     const [friends, setFriends] = React.useState([]);
     const statsToUse = useMemo(() => {
-        let combined = [];
+        let combined = createMonthAggregateStats();
+
         Object.keys(byMonthStats).forEach(m => {
             if (byMonthStats[m]) {
-                combined = combined.concat(byMonthStats[m]);
+                combined = deepAdd(combined, byMonthStats[m]);
             }
         });
-        return combined[0];
+
+        return combined;
     }, [byMonthStats]);
 
     useFocusEffect(() => {
@@ -38,6 +42,8 @@ export default function ProfileScreen() {
     });
 
     const holesPlayed = statsToUse.holesPlayed === 0 ? 1 : statsToUse.holesPlayed;
+
+    // console.log("strokes gained: " + (statsToUse.strokesGained.expectedStrokes - statsToUse.totalPutts) / (holesPlayed / 18));
 
     return (
         <ScreenWrapper style={{ paddingHorizontal: 24, borderBottomWidth: 1, borderBottomColor: colors.border.default }}>

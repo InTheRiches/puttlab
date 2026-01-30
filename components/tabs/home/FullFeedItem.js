@@ -24,7 +24,7 @@ export function FullFeedItem({userData, item}) {
                     <View style={{ borderRadius: 50, backgroundColor: 'white', padding: 8 }}>
                         <Image source={require('../../../assets/branding/FlatstickMallet.png')} style={{ width: 40, height: 40 }} />
                     </View>
-                    <View style={{marginLeft: 8}}>
+                    <View style={{marginLeft: 8, flex: 1, paddingRight: 2}}>
                         <Text style={{color: colors.text.primary, fontSize: 20, fontWeight: 500}}>{item.user.displayName}</Text>
                         <Text style={{ color: colors.text.secondary, fontSize: 15, marginTop: -4}}>At {item.specifics.score ? item.specifics.courseName : "Practice Putting Green"}</Text>
                     </View>
@@ -34,7 +34,7 @@ export function FullFeedItem({userData, item}) {
             <Pressable onPress={() => {
                 router.push({pathname: (item.specifics.score ? "/sessions/individual/full" : "/sessions/individual"), params: {recap: false, userId: userData.uid === item.session.userId ? undefined : item.user.id, sessionId: item.session.id}});
             }}>
-                {item.specifics.score ? <BareScorecardCard data={item.scorecard}/> : <PuttScorecardCard data={item.scorecard} front={true} totalPutts={item.stats.totalPutts} strokesGained={item.stats.strokesGained}/>}
+                {item.specifics.score ? <BareScorecardCard data={item.scorecard}/> : <PuttScorecardCard data={item.scorecard} front={true} totalPutts={item.stats.totalPutts} roundedTop={true} strokesGained={item.stats.strokesGained}/>}
                 <View style={{backgroundColor: colors.background.secondary, borderWidth: 1, borderColor: colors.border.default, borderBottomLeftRadius: 16, borderBottomRightRadius: 16}}>
                     <View style={{ flexDirection: "row", borderBottomWidth: 1, borderBottomColor: colors.border.default }}>
                         <View style={{flexDirection: "column", flex: 0.6, borderRightWidth: 1, borderColor: colors.border.default, paddingBottom: 8, paddingTop: 6, paddingLeft: 12,}}>

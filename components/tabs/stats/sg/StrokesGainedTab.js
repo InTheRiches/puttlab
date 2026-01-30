@@ -59,7 +59,9 @@ export const StrokesGainedTab = ({statsToUse, byMonthStats, showDifference = fal
 
     return (
         <ScrollView contentContainerStyle={{paddingBottom: 0, alignItems: "center"}} showsVerticalScrollIndicator={false} bounces={false} style={{width: width, paddingHorizontal: 20}}>
-            <FontText style={{color: colors.text.secondary, fontSize: 14, fontWeight: 400, textAlign: "center"}}>Strokes Gained</FontText>
+            <FontText style={{ color: colors.text.secondary, fontSize: 14, fontWeight: 400, textAlign: "center" }}>Strokes Gained</FontText>
+            <FontText style={{ color: colors.text.secondary, fontSize: 12, fontWeight: 800, marginTop: 2, textAlign: "center" }}>VS</FontText>
+            <FontText style={{ color: colors.text.secondary, fontSize: 14, fontWeight: 400, textAlign: "center" }}>PGA Tour Pro</FontText>
             <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center", width: "100%", gap: 6}}>
                 <FontText style={{color: colors.text.primary, fontSize: 48, fontWeight: 600}}>{((statsToUse.strokesGained.expectedStrokes - statsToUse.totalPutts) / (statsToUse.holesPlayed / 18)) > 0 ? "+" : ""}{roundTo((statsToUse.strokesGained.expectedStrokes - statsToUse.totalPutts) / (statsToUse.holesPlayed / 18), 1)}</FontText>
                 { previousStats !== undefined && previousStats.length > 0 && difference !== 0 &&
@@ -68,7 +70,7 @@ export const StrokesGainedTab = ({statsToUse, byMonthStats, showDifference = fal
                     </View>
                 }
             </View>
-            <FontText style={{color: colors.text.secondary, fontSize: 14, fontWeight: 400, textAlign: "center"}}>(over 18 holes)</FontText>
+            <FontText style={{color: colors.text.secondary, fontSize: 14, fontWeight: 400, textAlign: "center"}}>(per 18 holes)</FontText>
             <View style={{flexDirection: "row", gap: 10, marginTop: 24, marginBottom: 16}}>
                 <Toggleable toggled={graph === 0} onToggle={() => setGraph(0)} title={"Distance"}/>
                 <Toggleable toggled={graph === 1} onToggle={() => setGraph(1)} title={"Direction"}/>

@@ -138,7 +138,7 @@ export default function HomeScreen() {
         else if (item.session.type === "sim") {
             return <SimFeedItem userData={userData} item={item} />;
         }
-        else if (item.session.type=="green") {
+        else if (item.session.type === "green") {
             return <SimFeedItem userData={userData} item={item} />;
         }
     };
@@ -146,6 +146,9 @@ export default function HomeScreen() {
     return (
         <BottomSheetModalProvider>
             <ScreenWrapper>
+                <View>
+                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+                </View>
                 <View style={{
                     flex: 1,
                     flexDirection: "column",
@@ -168,9 +171,6 @@ export default function HomeScreen() {
                             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                         }
                     />
-                </View>
-                <View style={{position: "absolute", bottom: 0}}>
-                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
                 </View>
             </ScreenWrapper>
         </BottomSheetModalProvider>

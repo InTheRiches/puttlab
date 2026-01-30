@@ -48,11 +48,11 @@ export function Header({bottomBorder = false}) {
                     </Svg>
                 </Pressable>
             </View>
-            {!bottomBorder && (
-                <View style={{justifyContent: "center", alignItems: "center"}}>
-                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
-                </View>
-            )}
+            {/*{!bottomBorder && (*/}
+            {/*    <View style={{justifyContent: "center", alignItems: "center"}}>*/}
+            {/*        <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />*/}
+            {/*    </View>*/}
+            {/*)}*/}
         </View>
     )
 }

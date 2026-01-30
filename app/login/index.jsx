@@ -96,8 +96,7 @@ export default function Login() {
         });
     }
 
-    // TODO this translucent does jack squat because there is nothing underneath it
-    return (loading ? <Loading translucent={true}/> :
+    return (loading ? <Loading/> :
         <>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>

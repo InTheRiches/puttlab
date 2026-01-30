@@ -33,7 +33,7 @@ export function SimFeedItem({userData, item}) {
             <Pressable onPress={() => {
                 router.push({pathname: "/sessions/individual", params: {recap: false, userId: userData.uid === item.session.userId ? undefined : item.user.id, sessionId: item.session.id}});
             }}>
-                <PuttScorecardCard data={item.scorecard} front={true} totalPutts={item.stats.totalPutts} strokesGained={item.stats.strokesGained}/>
+                <PuttScorecardCard data={item.scorecard} front={true} totalPutts={item.stats.totalPutts} roundedTop={true} strokesGained={item.stats.strokesGained}/>
                 <View style={{backgroundColor: colors.background.secondary, borderWidth: 1, borderColor: colors.border.default, borderBottomLeftRadius: 16, borderBottomRightRadius: 16}}>
                     <View style={{ flexDirection: "row", borderBottomWidth: 1, borderBottomColor: colors.border.default }}>
                         <View style={{flexDirection: "column", flex: 0.6, borderRightWidth: 1, borderColor: colors.border.default, paddingBottom: 8, paddingTop: 6, paddingLeft: 12,}}>

@@ -90,6 +90,7 @@ export function PuttingGreen({
             const snappedY = Math.round(data.y / boxHeight) * boxHeight;
 
             runOnJS(update)("point", {x: snappedX, y: snappedY});
+            console.log("Tapped at:", data.x, data.y, "Snapped to:", snappedX, snappedY);
         }) : Gesture.Tap()
         .onStart((data) => {
             if (largeMiss && largeMiss.distance !== -1) {

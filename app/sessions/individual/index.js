@@ -110,7 +110,7 @@ export default function IndividualSession() {
                         {session.meta.type === "real" && (
                             <ScorecardHeader session={session}/>
                         )}
-                        <PuttScorecardCard data={session.scorecard} front={true} roundedBottom={true} roundedTop={false} totalPutts={session.stats.totalPutts} strokesGained={session.stats.strokesGained}/>
+                        {session && <PuttScorecardCard data={session.scorecard} front={true} roundedBottom={true} roundedTop={false} totalPutts={session.stats.totalPutts} strokesGained={session.stats.strokesGained}/>}
                         <View style={{flexDirection: "row"}}>
                             <StrokesGainedSection session={session}/>
                             <PerformanceSection session={session} numOfHoles={numOfHoles} preferences={userData.preferences} />

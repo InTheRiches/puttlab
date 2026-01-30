@@ -234,13 +234,13 @@ export function calculateGPSRoundStats(roundData, greens, units) {
             return;
         }
 
+        const { pinLocation, taps: putts } = hole.puttData;
+        if (!putts || putts.length === 0) return;
+
         detailedPutts.push({
             ...hole,
             totalPutts: putts.length
         });
-
-        const { pinLocation, taps: putts } = hole.puttData;
-        if (!putts || putts.length === 0) return;
 
         let lidarGrid = null;
 

@@ -49,14 +49,14 @@ function createMisreadsByBreak(currentStats) {
 
     if (max === 0) {
         return {
-            "Downhill\nStraight": [0, "0%"],
-            "Downhill\nLeft to Right": [0, "0%"],
-            "Neutral\nLeft to Right": [0, "0%"],
-            "Uphill\nLeft to Right": [0, "0%"],
-            "Uphill\nStraight": [0, "0%"],
-            "Uphill\nRight to Left": [0, "0%"],
-            "Neutral\nRight to Left": [0, "0%"],
-            "Downhill\nRight to Left": [0, "0%"],
+            "Downhill\nStraight": [0.24, "12%"],
+            "Downhill\nLeft to Right": [0.54, "27%"],
+            "Neutral\nLeft to Right": [0.86, "43%"],
+            "Uphill\nLeft to Right": [0.16, "8%"],
+            "Uphill\nStraight": [0.04, "2%"],
+            "Uphill\nRight to Left": [0.36, "18%"],
+            "Neutral\nRight to Left": [0.76, "38%"],
+            "Downhill\nRight to Left": [0.42, "21%"],
         };
     }
 

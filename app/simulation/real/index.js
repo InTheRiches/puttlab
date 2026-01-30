@@ -531,6 +531,9 @@ export default function PuttsOnlyRound() {
                 marginBottom: 18,
                 justifyContent: "space-between"
             }}>
+                <View style={{marginLeft: -20}}>
+                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}/>
+                </View>
                 <View>
                     <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                         <View style={{flexDirection: "row", marginBottom: 6}}>
@@ -557,7 +560,7 @@ export default function PuttsOnlyRound() {
                         </Pressable>
                     </View>
                 </View>
-                <View style={{flexDirection: "row", justifyContent: "space-around", gap: 8, marginTop: 12, paddingBottom: 8}}>
+                <View style={{flexDirection: "row", justifyContent: "space-around", gap: 8, marginTop: 12}}>
                     <Pressable onPress={() => {
                         setTapMode("pin");
                     }} style={{
@@ -602,75 +605,77 @@ export default function PuttsOnlyRound() {
                     </Pressable>
                 </View>
                 {MemoizedGreenPolygon}
-                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 12}}>
-                    {prediction && prediction.puttDistanceFeet && (
-                        <View style={{position: "absolute", left: 0}}>
-                            <Text style={{color: '#777'}}>📏 Distance</Text>
-                            <Text style={{fontSize: 18, fontWeight: '700', color: '#333',}}>{prediction.puttDistanceFeet.toFixed(1)} ft</Text>
+                <View style={{flexDirection: "column", marginTop: 4}}>
+                    <View style={{flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
+                        {prediction && prediction.puttDistanceFeet && (
+                            <View style={{position: "absolute", left: 0}}>
+                                <Text style={{color: '#777'}}>📏 Distance</Text>
+                                <Text style={{fontSize: 18, fontWeight: '700', color: '#333',}}>{prediction.puttDistanceFeet.toFixed(1)} ft</Text>
+                            </View>
+                        )}
+                        <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 6}}>
+                            <View style={{aspectRatio: 1, width: 14, borderWidth: 1, marginRight: 6, borderRadius: "50%", backgroundColor: "#76eeff"}}></View>
+                            <Text style={{fontWeight: 500, fontSize: 14}}>Your Location</Text>
                         </View>
-                    )}
-                    <View style={{flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 6}}>
-                        <View style={{aspectRatio: 1, width: 14, borderWidth: 1, marginRight: 6, borderRadius: "50%", backgroundColor: "#76eeff"}}></View>
-                        <Text style={{fontWeight: 500, fontSize: 14}}>Your Location</Text>
                     </View>
-                </View>
 
-                <View style={{flexDirection: "row", justifyContent: "space-around", gap: 8, marginTop: 12, borderBottomWidth: 1, borderBottomColor: colors.border.default, paddingBottom: 12}}>
-                    <Pressable onPress={() => {
-                        if (userLocation === null) return;
-                        // check if the user is on the green
-                        if (isPointInPolygon(userLocation, currentGreen?.geojson.coordinates)) {
-                            if (tapMode === "pin") {
-                                setPinLocation(userLocation);
-                                return;
+                    <View style={{flexDirection: "row", justifyContent: "space-around", gap: 8, marginTop: 16, borderBottomWidth: 1, borderBottomColor: colors.border.default, paddingBottom: 12}}>
+                        <Pressable onPress={() => {
+                            if (userLocation === null) return;
+                            // check if the user is on the green
+                            if (isPointInPolygon(userLocation, currentGreen?.geojson.coordinates)) {
+                                if (tapMode === "pin") {
+                                    setPinLocation(userLocation);
+                                    return;
+                                }
+                                setTaps(prevTaps => [...prevTaps, {...userLocation, misReadSlope: false, misReadLine: false}]);
                             }
-                            setTaps(prevTaps => [...prevTaps, {...userLocation, misReadSlope: false, misReadLine: false}]);
-                        }
-                    }} style={({pressed}) => ({
-                        paddingRight: 5,
-                        paddingLeft: 0,
-                        paddingVertical: 10,
-                        borderRadius: 10,
-                        borderWidth: 1,
-                        flex: 1,
-                        borderColor: userLocation === null ? colors.button.disabled.border : colors.button.primary.border,
-                        backgroundColor: userLocation === null ? colors.button.disabled.background : pressed ? colors.button.primary.depressed : colors.button.primary.background,
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: 'center',
-                    })}>
-                        <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={userLocation === null ? colors.button.disabled.text : colors.button.primary.text} width={20} height={20}>
-                            <Path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
-                        </Svg>
-                        <FontText style={{color: userLocation === null ? colors.button.disabled.text : colors.button.primary.text, marginLeft: 4, fontWeight: 500}}>Mark From Location</FontText>
-                    </Pressable>
-                    <Pressable onPress={() => {
-                        setPinLocation(null);
-                        setTaps([]);
-                        setTapMode("pin");
-                    }} style={({pressed}) => [{
-                        paddingHorizontal: 5,
-                        flex: 0.5,
-                        paddingVertical: 10,
-                        borderRadius: 10,
-                        borderWidth: 1,
-                        borderColor: colors.button.danger.border,
-                        backgroundColor:  pressed ? colors.button.danger.depressed : colors.button.danger.background,
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: 'center',
-                    }]}>
-                        <FontText style={{color: colors.button.danger.text, fontWeight: 500}}>Clear Shots</FontText>
-                    </Pressable>
-                    <Pressable style={({pressed}) => ({alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 10, borderWidth: 1, borderColor: colors.button.primary.border, backgroundColor: pressed ? colors.button.primary.depressed : colors.button.primary.background})} onPress={() => {
-                        predictionRef.current.open(prediction);
-                    }}>
-                        <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={"black"} width={24} height={24}>
-                            <Path fillRule="evenodd"
-                                  d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-                                  clipRule="evenodd"/>
-                        </Svg>
-                    </Pressable>
+                        }} style={({pressed}) => ({
+                            paddingRight: 5,
+                            paddingLeft: 0,
+                            paddingVertical: 10,
+                            borderRadius: 10,
+                            borderWidth: 1,
+                            flex: 1,
+                            borderColor: userLocation === null ? colors.button.disabled.border : colors.button.primary.border,
+                            backgroundColor: userLocation === null ? colors.button.disabled.background : pressed ? colors.button.primary.depressed : colors.button.primary.background,
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: 'center',
+                        })}>
+                            <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={userLocation === null ? colors.button.disabled.text : colors.button.primary.text} width={20} height={20}>
+                                <Path fillRule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
+                            </Svg>
+                            <FontText style={{color: userLocation === null ? colors.button.disabled.text : colors.button.primary.text, marginLeft: 4, fontWeight: 500}}>Mark From Location</FontText>
+                        </Pressable>
+                        <Pressable onPress={() => {
+                            setPinLocation(null);
+                            setTaps([]);
+                            setTapMode("pin");
+                        }} style={({pressed}) => [{
+                            paddingHorizontal: 5,
+                            flex: 0.5,
+                            paddingVertical: 10,
+                            borderRadius: 10,
+                            borderWidth: 1,
+                            borderColor: colors.button.danger.border,
+                            backgroundColor:  pressed ? colors.button.danger.depressed : colors.button.danger.background,
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: 'center',
+                        }]}>
+                            <FontText style={{color: colors.button.danger.text, fontWeight: 500}}>Clear Shots</FontText>
+                        </Pressable>
+                        <Pressable style={({pressed}) => ({alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 10, borderWidth: 1, borderColor: colors.button.primary.border, backgroundColor: pressed ? colors.button.primary.depressed : colors.button.primary.background})} onPress={() => {
+                            predictionRef.current.open(prediction);
+                        }}>
+                            <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={"black"} width={24} height={24}>
+                                <Path fillRule="evenodd"
+                                      d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
+                                      clipRule="evenodd"/>
+                            </Svg>
+                        </Pressable>
+                    </View>
                 </View>
 
                 <Pressable onPress={() => {
@@ -694,9 +699,6 @@ export default function PuttsOnlyRound() {
                         textAlign: "center"
                     }}>Holed Out?</FontText>
                 </Pressable>
-                <View style={{marginLeft: -20}}>
-                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}/>
-                </View>
                 <View style={{flexDirection: "row", justifyContent: "space-between", gap: 4, paddingHorizontal: 16}}>
                     <PrimaryButton style={{borderRadius: 12, paddingVertical: 12, flex: 1, maxWidth: 128}}
                                    title="Back"

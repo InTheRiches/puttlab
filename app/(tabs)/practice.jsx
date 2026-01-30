@@ -38,6 +38,9 @@ export default function HomeScreen() {
     return (
         <BottomSheetModalProvider>
             <ScreenWrapper>
+                <View>
+                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+                </View>
                 <View style={{
                     flex: 1,
                     flexDirection: "column",
@@ -55,9 +58,6 @@ export default function HomeScreen() {
                         <SeeAllSessions/>
                         <PracticeModes newSessionRef={newSessionRef} unfinishedRound={unfinishedRound} unfinishedRoundRef={unfinishedRoundRef}></PracticeModes>
                     </ScrollView>
-                </View>
-                <View style={{position: "absolute", bottom: 0}}>
-                    <BannerAd ref={bannerRef} unitId={bannerAdId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
                 </View>
             </ScreenWrapper>
             <NewRound newSessionRef={newSessionRef}></NewRound>
