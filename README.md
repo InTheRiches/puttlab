@@ -1,50 +1,26 @@
-# Welcome to your Expo app 👋
+# Flatstick
+**Flatstick** is a golf putting analysis app designed to help players improve their putting skills through detailed statistics, simulations, and data-driven insights. The app combines real-world data with advanced analytics to give golfers actionable feedback on every putt.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+<img width="2207" height="968" alt="image" src="https://github.com/user-attachments/assets/232ab8e7-55cc-457f-a075-8a40941d6502" />
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- **Putts Tracking** – Log each putt, including distance, direction, slope, and break.  
+- **Statistics & Trends** – Generate detailed stats like average miss distances, left-to-right vs right-to-left tendencies, and putt success rates.  
+- **Compare Mode** – Compare your putting performance across sessions or with friends.  
+- **Integration with Public Data** – Uses LiDAR and OpenStreetMap data to analyze green contours and putt behavior.
+- **Intelligent Practice** - Allows for mock "rounds" to be emulated on a practice green, instructing the user on where to putt.
+- **Intuitive Interface** – Quick marking of putts and a clean, minimal design for easy navigation.  
 
-2. Start the app
+---
 
-   ```bash
-    npx expo start
-   ```
+## Tech Stack
 
-In the output, you'll find options to open the app in a
+- **Frontend:** React Native
+- **Data Analysis:** JavaScript engine for statistics calculations  
+- **Mapping & Simulation:** OpenStreetMap, LiDAR-based terrain modeling  
+- **Platform:** Mobile (iOS & Android)  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
